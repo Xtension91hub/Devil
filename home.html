@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Arena OS | Mobile Pro</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap');
+
+        :root {
+            --neon-blue: #00d2ff;
+            --bg-deep: #020617;
+            --card-bg: rgba(15, 23, 42, 0.8);
+            --border: rgba(255, 255, 255, 0.08);
+        }
+
+        * { 
+            margin: 0; padding: 0; box-sizing: border-box; 
+            font-family: 'Outfit', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-bottom: 90px; /* Space for Bottom Nav */
+        }
+
+        /* --- BACKGROUND --- */
+        .bg-wrap {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at top right, #1e293b, #020617);
+        }
+
+        /* --- MOBILE SLIDER --- */
+        .promo-slider {
+            width: 92%;
+            height: 160px; /* Reduced for mobile */
+            margin: 15px auto;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .slides { display: flex; width: 500%; height: 100%; animation: slideAnim 15s infinite ease-in-out; }
+        .slide { width: 20%; height: 100%; background-size: cover; background-position: center; }
+
+        @keyframes slideAnim {
+            0%, 20% { transform: translateX(0); }
+            25%, 45% { transform: translateX(-20%); }
+            50%, 70% { transform: translateX(-40%); }
+            75%, 95% { transform: translateX(-60%); }
+            100% { transform: translateX(-80%); }
+        }
+
+        /* --- GRID SYSTEM (Optimized for Mobile) --- */
+        .container {
+            width: 92%;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Mobile pe 2 column system best hai */
+            gap: 12px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.2s;
+        }
+
+        .card:active { transform: scale(0.96); } /* Click effect for mobile */
+
+        /* Layout Spans */
+        .hero { grid-column: span 2; padding: 25px; min-height: 180px; justify-content: center; }
+        .profile { grid-column: span 1; align-items: flex-start; }
+        .wallet { grid-column: span 1; align-items: center; text-align: center; }
+        .stats { grid-column: span 2; }
+        .settings { grid-column: span 2; flex-direction: row; justify-content: space-around; padding: 12px; }
+
+        /* --- TEXT & UI --- */
+        .tag { color: var(--neon-blue); font-size: 9px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; }
+        h1 { font-size: 1.8rem; font-weight: 900; line-height: 1; margin-bottom: 10px; }
+        .balance { font-size: 1.6rem; font-weight: 900; margin: 4px 0; }
+        .avatar { width: 45px; height: 45px; border-radius: 12px; border: 2px solid var(--neon-blue); margin-bottom: 8px; }
+
+        .btn-join { 
+            background: #fff; color: #000; padding: 10px 20px; border-radius: 12px; 
+            font-weight: 900; border: none; font-size: 12px; width: fit-content;
+        }
+
+        /* Stats Row */
+        .stats-row { display: flex; justify-content: space-between; width: 100%; margin-top: 10px; }
+        .stat-item { text-align: center; }
+        .stat-item h4 { font-size: 1.2rem; font-weight: 900; }
+        .stat-item p { font-size: 9px; opacity: 0.5; text-transform: uppercase; }
+
+        /* --- BOTTOM NAV (Mobile Fixed) --- */
+        nav {
+            position: fixed;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 85%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            padding: 12px 0;
+            border-radius: 100px;
+            display: flex;
+            justify-content: space-around;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .nav-link { color: #475569; display: flex; align-items: center; justify-content: center; width: 45px; height: 45px; border-radius: 50%; transition: 0.3s; }
+        .nav-link.active { color: var(--neon-blue); background: rgba(0, 210, 255, 0.1); }
+
+    </style>
+</head>
+<body>
+
+    <div class="bg-wrap"></div>
+
+    <div class="promo-slider">
+        <div class="slides">
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=600')"></div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=600')"></div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=600')"></div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=600')"></div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=600')"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        
+        <a href="arena.html" class="card hero">
+            <p class="tag">● Live Arena</p>
+            <h1>JOIN THE<br>PRO BATTLE</h1>
+            <button class="btn-join">START PLAYING</button>
+        </a>
+
+        <a href="profile.html" class="card profile">
+            <img src="https://api.dicebear.com/7.x/bottts-neutral/svg?seed=Mustafa" class="avatar">
+            <h3 id="playerName" style="font-size: 1rem;">Mustafa_Ak</h3>
+            <p class="tag" style="margin:0; font-size: 8px;">Diamond 4</p>
+        </a>
+
+        <a href="wallet.html" class="card wallet">
+            <p class="tag">Wallet</p>
+            <div class="balance">₹4.5K</div>
+            <p style="font-size: 9px; opacity: 0.6;">+ ADD FUNDS</p>
+        </a>
+
+        <div class="card stats">
+            <p class="tag">Performance</p>
+            <div class="stats-row">
+                <div class="stat-item"><h4>12</h4><p>Wins</p></div>
+                <div class="stat-item"><h4>84%</h4><p>Win Rate</p></div>
+                <div class="stat-item"><h4>4th</h4><p>Global</p></div>
+            </div>
+        </div>
+
+        <div class="card settings">
+            <i data-lucide="shield-check" size="20"></i>
+            <i data-lucide="bell" size="20"></i>
+            <i data-lucide="cpu" size="20"></i>
+            <i data-lucide="log-out" size="20" style="color: #ff4b4b;"></i>
+        </div>
+
+    </div>
+
+    <nav>
+        <a href="index.html" class="nav-link active"><i data-lucide="layout-grid"></i></a>
+        <a href="arena.html" class="nav-link"><i data-lucide="swords"></i></a>
+        <a href="wallet.html" class="nav-link"><i data-lucide="wallet"></i></a>
+        <a href="profile.html" class="nav-link"><i data-lucide="user"></i></a>
+    </nav>
+
+    <script>
+        lucide.createIcons();
+
+        window.onload = () => {
+            const savedName = localStorage.getItem('playerName');
+            if (savedName) document.getElementById('playerName').innerText = savedName;
+        };
+    </script>
+</body>
+</html>

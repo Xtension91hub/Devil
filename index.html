@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arena OS | The Future of Gaming</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap');
+
+        :root {
+            --neon-blue: #00d2ff;
+            --bg-deep: #020617;
+            --card-bg: rgba(15, 23, 42, 0.8);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+
+        body {
+            background-color: var(--bg-deep);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* --- ANIMATED BACKGROUND --- */
+        .hero-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, #1e293b 0%, #020617 100%);
+        }
+
+        .circles {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden;
+        }
+
+        .circles li {
+            position: absolute; display: block; list-style: none;
+            width: 20px; height: 20px; background: rgba(0, 210, 255, 0.1);
+            animation: animate 25s linear infinite; bottom: -150px;
+        }
+
+        @keyframes animate {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; border-radius: 0; }
+            100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; border-radius: 50%; }
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .logo-box {
+            background: rgba(0, 210, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 100px;
+            border: 1px solid var(--neon-blue);
+            font-weight: 800;
+            font-size: 12px;
+            letter-spacing: 4px;
+            color: var(--neon-blue);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            animation: fadeInDown 1s ease;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 900;
+            line-height: 0.9;
+            background: linear-gradient(to bottom, #fff, #64748b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .desc {
+            max-width: 600px;
+            font-size: 1.1rem;
+            color: #94a3b8;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        /* --- START BUTTON --- */
+        .start-btn {
+            position: relative;
+            padding: 20px 50px;
+            background: var(--neon-blue);
+            color: #000;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 18px;
+            border-radius: 100px;
+            box-shadow: 0 0 30px rgba(0, 210, 255, 0.4);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+        }
+
+        .start-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 50px rgba(0, 210, 255, 0.6);
+        }
+
+        /* --- FEATURES SECTION --- */
+        .features {
+            padding: 100px 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feat-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 40px;
+            border: 1px solid var(--border);
+            text-align: left;
+            transition: 0.3s;
+        }
+
+        .feat-card:hover { border-color: var(--neon-blue); transform: translateY(-10px); }
+        .feat-card i { color: var(--neon-blue); margin-bottom: 20px; }
+        .feat-card h3 { font-size: 1.5rem; margin-bottom: 10px; }
+        .feat-card p { opacity: 0.6; font-size: 14px; }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .circles li:nth-child(1){ left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
+        .circles li:nth-child(2){ left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
+        .circles li:nth-child(3){ left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
+
+    </style>
+</head>
+<body>
+
+    <div class="hero-bg">
+        <ul class="circles">
+            <li></li><li></li><li></li><li></li><li></li>
+        </ul>
+    </div>
+
+    <section class="hero">
+        <div class="logo-box">Arena OS Pro</div>
+        <h1>PLAY. EARN.<br>CONQUER.</h1>
+        <p class="desc">
+            The ultimate e-sports platform where your skills translate into real rewards. 
+            Join thousands of pro players in daily tournaments.
+        </p>
+        
+        <a href="home.html" class="start-btn">
+            GET STARTED 
+            <i data-lucide="arrow-right" style="vertical-align: middle; margin-left: 10px;"></i>
+        </a>
+    </section>
+
+    <section class="features">
+        <div class="feat-card">
+            <i data-lucide="shield-check" size="40"></i>
+            <h3>Secure Wallet</h3>
+            <p>Fast deposits and instant withdrawals directly to your UPI or Bank account. Your money is always safe.</p>
+        </div>
+        <div class="feat-card">
+            <i data-lucide="swords" size="40"></i>
+            <h3>Daily Tournaments</h3>
+            <p>Participate in BGMI, Free Fire, and TDM matches every hour. Win huge prize pools and kill bonuses.</p>
+        </div>
+        <div class="feat-card">
+            <i data-lucide="zap" size="40"></i>
+            <h3>Instant Support</h3>
+            <p>Our team is available 24/7 to help you with match results, payments, and account issues.</p>
+        </div>
+    </section>
+
+    <footer style="padding: 50px; text-align: center; opacity: 0.4; font-size: 12px;">
+        &copy; 2026 Arena OS Pro. Developed for Mustafa_Ak.
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

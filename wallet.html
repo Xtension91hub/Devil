@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Wallet | Arena OS</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap');
+
+        :root {
+            --neon-blue: #00d2ff;
+            --neon-green: #22c55e;
+            --neon-red: #ff4b4b;
+            --bg-deep: #020617;
+            --card-bg: rgba(15, 23, 42, 0.8);
+            --border: rgba(255, 255, 255, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            background-color: var(--bg-deep);
+            color: white;
+            min-height: 100vh;
+            padding-bottom: 100px;
+        }
+
+        header {
+            padding: 25px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn { background: var(--card-bg); border: 1px solid var(--border); color: white; padding: 10px; border-radius: 12px; }
+
+        /* --- BALANCE CARD --- */
+        .balance-card {
+            width: 90%;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            padding: 30px;
+            border-radius: 30px;
+            border: 1px solid var(--border);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .balance-card::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(0, 210, 255, 0.1) 0%, transparent 70%);
+        }
+
+        .balance-label { font-size: 12px; opacity: 0.6; text-transform: uppercase; letter-spacing: 2px; }
+        .main-balance { font-size: 3rem; font-weight: 900; margin: 10px 0; }
+
+        /* --- ACTION BUTTONS --- */
+        .wallet-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            width: 90%;
+            margin: 0 auto 30px;
+        }
+
+        .action-btn {
+            padding: 18px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .btn-deposit { background: var(--neon-blue); color: #000; }
+        .btn-withdraw { background: var(--card-bg); color: #fff; }
+        .action-btn:active { transform: scale(0.95); }
+
+        /* --- TRANSACTIONS --- */
+        .history-section { width: 90%; margin: 0 auto; }
+        .section-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .section-title span { font-size: 12px; color: var(--neon-blue); }
+
+        .transaction-list { display: flex; flex-direction: column; gap: 12px; }
+
+        .tx-item {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .tx-icon {
+            width: 45px; height: 45px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .tx-details { flex: 1; margin-left: 15px; }
+        .tx-name { font-weight: 700; font-size: 14px; }
+        .tx-date { font-size: 11px; opacity: 0.5; margin-top: 2px; }
+
+        .tx-amount { font-weight: 900; font-size: 15px; }
+        .amt-plus { color: var(--neon-green); }
+        .amt-minus { color: var(--neon-red); }
+
+        /* --- NAV --- */
+        nav { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); width: 85%; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px); border: 1px solid var(--border); padding: 12px 0; border-radius: 100px; display: flex; justify-content: space-around; z-index: 1000; }
+        .nav-link { color: #475569; text-decoration: none; }
+        .nav-link.active { color: var(--neon-blue); }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="back-btn" onclick="location.href='index.html'"><i data-lucide="chevron-left"></i></div>
+        <h2 style="font-weight: 900;">MY WALLET</h2>
+        <div style="width: 40px;"></div>
+    </header>
+
+    <div class="balance-card">
+        <p class="balance-label">Available Balance</p>
+        <h1 class="main-balance">₹<span id="walletBal">4,500</span></h1>
+        <p style="font-size: 10px; opacity: 0.5;">Wallet ID: OS-77829-M</p>
+    </div>
+
+    <div class="wallet-actions">
+        <a href="deposit.html" class="action-btn btn-deposit">
+            <i data-lucide="plus-circle"></i> DEPOSIT
+        </a>
+        <a href="withdrawal.html" class="action-btn btn-withdraw">
+            <i data-lucide="arrow-up-right"></i> WITHDRAW
+        </a>
+    </div>
+
+    <div class="history-section">
+        <div class="section-title">
+            Recent Activity
+            <span>View All</span>
+        </div>
+
+        <div class="transaction-list">
+            <div class="tx-item">
+                <div class="tx-icon"><i data-lucide="swords" style="color: var(--neon-red);"></i></div>
+                <div class="tx-details">
+                    <p class="tx-name">Match Entry - Erangel</p>
+                    <p class="tx-date">Today, 02:45 PM</p>
+                </div>
+                <div class="tx-amount amt-minus">- ₹50</div>
+            </div>
+
+            <div class="tx-item">
+                <div class="tx-icon"><i data-lucide="download" style="color: var(--neon-green);"></i></div>
+                <div class="tx-details">
+                    <p class="tx-name">Money Deposited</p>
+                    <p class="tx-date">Yesterday, 11:20 AM</p>
+                </div>
+                <div class="tx-amount amt-plus">+ ₹500</div>
+            </div>
+
+            <div class="tx-item">
+                <div class="tx-icon"><i data-lucide="trophy" style="color: var(--neon-green);"></i></div>
+                <div class="tx-details">
+                    <p class="tx-name">Winning Prize - TDM</p>
+                    <p class="tx-date">10 Mar 2026</p>
+                </div>
+                <div class="tx-amount amt-plus">+ ₹120</div>
+            </div>
+        </div>
+    </div>
+
+    <nav>
+        <a href="home.html" class="nav-link"><i data-lucide="layout-grid"></i></a>
+        <a href="arena.html" class="nav-link"><i data-lucide="swords"></i></a>
+        <a href="wallet.html" class="nav-link active"><i data-lucide="wallet"></i></a>
+        <a href="profile.html" class="nav-link"><i data-lucide="user"></i></a>
+    </nav>
+
+    <script>
+        lucide.createIcons();
+
+        // Local Storage Sync
+        window.onload = () => {
+            const savedBalance = localStorage.getItem('walletBalance') || 4500;
+            document.getElementById('walletBal').innerText = savedBalance;
+        };
+    </script>
+</body>
+</html>
